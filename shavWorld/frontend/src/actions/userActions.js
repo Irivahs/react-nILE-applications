@@ -32,9 +32,9 @@ const signin = (email, password) => async(dispatch) => {
 }
 
 const register = (name, email, password) => async(dispatch) => {
-  dispatch({ type: USER_REGISTER_REQUEST, payload: {name, email, password}});
+  dispatch({ type: USER_REGISTER_REQUEST, payload: { name, email, password}});
   try {
-    const { data } = await Axios.post("/api/users/register", {name, email, password});
+    const { data } = await Axios.post("/api/users/register", { name, email, password});
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data});
     Cookie.set('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -42,9 +42,9 @@ const register = (name, email, password) => async(dispatch) => {
   }
 }
 
-const logout = () => (dispatch) => {
-  Cookie.remove("userInfo");
-  dispatch({ type: USER_LOGOUT })
-}
+ const logout = () => (dispatch) => {
+   Cookie.remove("userInfo");
+   dispatch({ type: USER_LOGOUT }) 
+  }
 
 export { signin, register, logout, update };

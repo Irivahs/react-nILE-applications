@@ -1,14 +1,11 @@
 import express from 'express';
 import data from './data';
-import dotenv from 'dotenv';
 import config from './config';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import userRoute from './routes/userRoute';
 import productRoute from './routes/productRoute';
 import orderRoute from './routes/orderRoute';
-
-dotenv.config();
 
 const mongodbUrl = config.MONGODB_URL;
 mongoose.connect(mongodbUrl, {
@@ -22,9 +19,9 @@ app.use(bodyParser.json());
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/orders", orderRoute);
-app.get("/api/config/paypal", (req, res) => {
-   res.send(config.PAYPAL_CLIENT_ID);
-})
+ app.get("/api/config/paypal", (req, res) => {
+    res.send(config.PAYPAL_CLIENT_ID);
+ })
 /*
 app.get("/api/products/:id", (req, res) => {
   const productId = req.params.id;

@@ -37,7 +37,7 @@ const listMyOrders = () => async (dispatch, getState) => {
     }
    }
 
-   const listOrders = () => async (dispatch, getState) => {
+const listOrders = () => async (dispatch, getState) => {
       try {
          dispatch({ type: ORDER_LIST_REQUEST });
          const { userSignin: { userInfo } } = getState();
@@ -66,7 +66,7 @@ const detailsOrder = (orderId) => async (dispatch, getState) => {
     }
    }
 
-   
+
 const payOrder = (order, paymentResult) => async (dispatch, getState) => {
     try {
       dispatch({ type: ORDER_PAY_REQUEST, payload: paymentResult });
@@ -81,7 +81,7 @@ const payOrder = (order, paymentResult) => async (dispatch, getState) => {
     }
   }
 
-  const deleteOrder = (orderId) => async (dispatch, getState) => {
+const deleteOrder = (orderId) => async (dispatch, getState) => {
    try {
      dispatch({ type: ORDER_DELETE_REQUEST, payload:  orderId });
      const { userSignin: { userInfo } } = getState();
@@ -94,4 +94,4 @@ const payOrder = (order, paymentResult) => async (dispatch, getState) => {
      dispatch({ type: ORDER_DELETE_FAIL, payload: error.message });
    }
  }
-export { createOrder, detailsOrder, payOrder, listMyOrders, listOrders, deleteOrder };
+export { createOrder, detailsOrder,payOrder, listMyOrders, listOrders, deleteOrder };

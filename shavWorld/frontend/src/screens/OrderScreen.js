@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createOrder, detailsOrder, payOrder } from '../actions/orderActions';
+import { createOrder, detailsOrder, payOrder, } from '../actions/orderActions';
 import PaypalButton from '../components/PaypalButton';
 function OrderScreen(props) {
 
-  const orderPay = useSelector(state => state.orderPay);
+  const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay, error: errorPay } = orderPay;
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,11 +18,12 @@ function OrderScreen(props) {
     };
   }, [successPay]);
 
+ 
   const handleSuccessPayment = (paymentResult) => {
     dispatch(payOrder(order, paymentResult));
   }
 
-  const orderDetails = useSelector(state => state.orderDetails);
+  const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
 
   return loading ? <div>Loading ...</div> : error ? <div>{error}</div> :

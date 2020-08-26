@@ -76,6 +76,6 @@ function HomeScreen(props){
             </ul>
         )}
     </>
-  );
+    )
 }
 export default HomeScreen;
