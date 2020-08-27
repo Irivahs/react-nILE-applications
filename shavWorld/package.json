@@ -1,7 +1,7 @@
 {
   "name": "shavworld",
   "version": "1.0.0",
-  "description": "Demo : http://shavworld.herokuapp.com/",
+  "description": "Demo : https://shavworld.herokuapp.com/",
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.19.0",
