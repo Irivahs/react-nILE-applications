@@ -83,7 +83,7 @@ router.get("/createadmin", async (req, res) => {
   try {
     const user = new _userModel.default({
       name: 'MdShaviri',
-      email: 'mdshaviri786@gmail.com',
+      email: 'atlasAdmin@admin',
       password: 'ScGkF5nCMDViE3v',
       isAdmin: true
     });
