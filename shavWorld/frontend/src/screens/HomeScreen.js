@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
+import Rating from '../components/Rating';
 
 function HomeScreen(props){
     const [searchKeyword, setSearchKeyword] = useState('');
@@ -21,11 +22,11 @@ function HomeScreen(props){
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(listProducts(category, searchKeyword,  sortOrder))
+        dispatch(listProducts(category, searchKeyword,  sortOrder));
     }
     const sortHandler = (e) =>{
         setSortOrder(e.target.value)
-        dispatch(listProducts(category, searchKeyword, sortOrder))
+        dispatch(listProducts(category, searchKeyword, sortOrder));
     }
 
     return (
@@ -68,7 +69,9 @@ function HomeScreen(props){
                             </div>
                             <div className="product-brand">{product.brand}</div>
                             <div className="product-price">${product.price}</div>
-                            <div className="product-rating">{product.ratings} Stars ({product.numReviews})
+                            <div className="product-rating">
+                                <Rating value={product.rating}
+                                 text={product.numReviews + ' reviews'} />
                           </div>
                         </div>
                     </li>
@@ -76,6 +79,6 @@ function HomeScreen(props){
             </ul>
         )}
     </>
-    )
+    );
 }
 export default HomeScreen;
