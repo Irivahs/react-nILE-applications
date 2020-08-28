@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const router = _express.default.Router();
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   const category = req.query.category ? {
     category: req.query.category
   } : {};
@@ -37,7 +37,43 @@ router.get("/", async (req, res) => {
   }).sort(sortOrder);
   res.send(products);
 });
-router.put("/:id", _util.isAuth, _util.isAdmin, async (req, res) => {
+router.get('/:id', async (req, res) => {
+  const product = await _productModel.default.findOne({
+    _id: req.params.id
+  });
+
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({
+      message: "Product Not Found"
+    });
+  }
+});
+router.post('/:id/reviews', _util.isAuth, async (req, res) => {
+  const product = await _productModel.default.findById(req.params.id);
+
+  if (product) {
+    const review = {
+      name: req.body.name,
+      rating: Number(req.body.rating),
+      comment: req.body.comment
+    };
+    product.reviews.push(review);
+    product.numReviews = product.reviews.length;
+    product.rating = product.reviews.reduce((a, c) => c.rating + a, 0) / product.reviews.length;
+    const updatedProduct = await product.save();
+    res.status(201).send({
+      data: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+      message: "Review saved successfully."
+    });
+  } else {
+    res.status(404).send({
+      message: "Product Not Found"
+    });
+  }
+});
+router.put('/:id', _util.isAuth, _util.isAdmin, async (req, res) => {
   const productId = req.params.id;
   const product = await _productModel.default.findById(productId);
 
@@ -63,20 +99,7 @@ router.put("/:id", _util.isAuth, _util.isAdmin, async (req, res) => {
     message: 'Error in Updating Product.'
   });
 });
-router.get("/:id", async (req, res) => {
-  const product = await _productModel.default.findOne({
-    _id: req.params.id
-  });
-
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({
-      message: "Product Not Found"
-    });
-  }
-});
-router.delete("/:id", _util.isAuth, _util.isAdmin, async (req, res) => {
+router.delete('/:id', _util.isAuth, _util.isAdmin, async (req, res) => {
   const deletedProduct = await _productModel.default.findById(req.params.id);
 
   if (deletedProduct) {
@@ -88,7 +111,7 @@ router.delete("/:id", _util.isAuth, _util.isAdmin, async (req, res) => {
     res.send("Error in Deletion.");
   }
 });
-router.post("/", _util.isAuth, _util.isAdmin, async (req, res) => {
+router.post('/', _util.isAuth, _util.isAdmin, async (req, res) => {
   const product = new _productModel.default({
     name: req.body.name,
     price: req.body.price,

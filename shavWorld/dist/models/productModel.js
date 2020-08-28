@@ -9,6 +9,22 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+const reviewSchema = new _mongoose.default.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  rating: {
+    type: Number,
+    default: 0
+  },
+  comment: {
+    type: String,
+    required: true
+  }
+}, {
+  timestamps: true
+});
 const productSchema = new _mongoose.default.Schema({
   name: {
     type: String,
@@ -49,7 +65,8 @@ const productSchema = new _mongoose.default.Schema({
     type: Number,
     default: 0,
     required: true
-  }
+  },
+  reviews: [reviewSchema]
 });
 
 const productModel = _mongoose.default.model("Product", productSchema);
