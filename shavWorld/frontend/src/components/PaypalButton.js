@@ -4,8 +4,8 @@ import axios from 'axios';
 function PaypalButton(props) {
   const [sdkReady, setSdkReady] = useState(false);
 
-  const addPaypalSdk = async () => {
-    const result = await axios.get("/api/config/paypal");
+  const addPaypalSdk = async() => {
+    const result = await axios.get('/api/config/paypal');
     const clientID = result.data;
     const script = document.createElement('script');
     script.type = 'text/javascript';

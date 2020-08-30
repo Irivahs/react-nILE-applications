@@ -23,11 +23,11 @@ function HomeScreen(props){
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(listProducts(category, searchKeyword,  sortOrder));
-    }
+    };
     const sortHandler = (e) =>{
         setSortOrder(e.target.value)
         dispatch(listProducts(category, searchKeyword, sortOrder));
-    }
+    };
 
     return (
         <>
